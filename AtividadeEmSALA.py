@@ -46,7 +46,13 @@ def editar_contatos(contatos, indice):
 contatos = []
 
 while True:
-    opc = int(input(f"Olá, bem vindo a lista de contatos \n Escolha uma opção: \n 1 - Cadastrar contato; \n 2 - Imprimir contatos cadastrados; \n 3 - Editar contatos; \n 4 - Deletar contato; \n 5 - Sair... Bye bye \n"))
+    opc = int(input("Olá, bem vindo a lista de contatos \n"
+                    " Escolha uma opção: \n" 
+                    "1 - Cadastrar contato; \n"
+                    "2 - Imprimir contatos cadastrados; \n"
+                    "3 - Editar contatos; \n"
+                    "4 - Deletar contato; \n"
+                    "5 - Sair... Bye bye \n"))
 
     if opc == 1:
 
