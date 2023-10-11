@@ -1,3 +1,63 @@
+def cadastrar_produto(produtos,nome,valor,quantidade,frete,i1,i2,i3,margem,vlrc,vlrv):
+    produto = { 
+        'Nome':nome,
+        'Valor':valor,
+        'Quantidade':quantidade,
+        'Frete':frete,
+        'Imp1':i1,
+        'Imp2':i2,
+        'Imp3':i3,
+        'Margem':margem,
+        'Valor_custo':vlrc,
+        'Valor_venda':vlrv
+    }
+    produtos.append(produto)
+    print(f"")
+    print("Produto cadastrado!")
+    print(f"****************************")
+    print(f"")
+
+def atualizar_produtos(produtos,indice,nome,valor,quantidade,frete,i1,i2,i3,margem,vlrc,vlrv):
+
+    if 0 <= indice <= len(produtos):
+              
+        print(f"****************************")
+        print("")
+        produtos[indice]['Nome'] = nome
+        produtos[indice]['Valor'] = valor
+        produtos[indice]['Quantidade'] = quantidade
+        produtos[indice]['Frete'] = frete
+        produtos[indice]['Imp1'] = i1
+        produtos[indice]['Imp2'] = i2
+        produtos[indice]['Imp3'] = i3
+        produtos[indice]['Margem'] = margem
+        produtos[indice]['Valor_custo']=vlrc
+        produtos[indice]['Valor_venda']=vlrv
+            
+        print(f"")
+        print("Produto atualizo!")
+        print(f"****************************")
+        print(f"")
+    else:
+        print("ID não encontrada!")
+
+def atualizar_estoque(produtos,indice):
+    if 0 <= indice <= len(produtos):
+        print(f"Nome do produto: {produtos[indice]['Nome']}")
+        print(f"Quantidade atual: {produtos[indice]['Quantidade']}")
+
+        if opc == 1:
+            produtos[indice]['Quantidade'] = produtos[indice]['Quantidade'] + int(input("Digite o quantidade que deseja acrescentar: "))
+        elif opc == 2:
+            produtos[indice]['Quantidade'] = produtos[indice]['Quantidade'] - int(input("Digite o quantidade que deseja diminuir: "))
+
+        print(f"")
+        print("Quantidade atualizado com sucesso!")
+        print(f"****************************")
+        print(f"")
+    else:
+        print("ID não encontrada!")
+
 def imprimir_produtos(produtos):
     for indice,produto in enumerate(produtos):
         print(f"****************************")
@@ -8,13 +68,13 @@ def imprimir_produtos(produtos):
         print(f"Frete:  {produto['Frete']/produto['Quantidade']}")
         print(f"Imposto 1:  {produto['Valor']*produto['Imp1']}")
         print(f"Imposto 2:  {produto['Valor']*produto['Imp2']}")
-        print(f"Imposto 3:  {produto['Valor']*produto['Imp3']}")
-        print(f"Margem:  {produto['Valor']*produto['Margem']}")
+        print(f"Imposto 3:  {produto['Valor']*produto['Imp3']}")      
 
         custo=produto['Valor']+(produto['Valor']*produto['Imp1'])+(produto['Valor']*produto['Imp2'])+(produto['Valor']*produto['Imp3'])+(produto['Frete']/produto['Quantidade'])
-
-        print(f"Valor de custo:  {custo}")
-        print(f"Valor de venda:  {custo+produto['Margem']}")
+        print(f"Margem:  {custo*produto['Margem']:.2f}")
+        
+        print(f"Valor de custo:  {custo:.2f}")
+        print(f"Valor de venda:  {custo*(1+produto['Margem']):.2f}")
         print(f"****************************")
         print(f"")
 
@@ -33,8 +93,8 @@ while True:
                     "2 - Imprimir produtos cadastrados: \n"
                     "3 - Atualizar produto:\n"
                     "4 - Deletar produto:\n"
-                    "5 - Atualizar a quantidade em estoque:"
-                    "6 - Saindo do sistema de estoque \n"))
+                    "5 - Atualizar a quantidade em estoque:\n"
+                    "6 - Saindo do sistema de estoque\n"))
 
     if opc == 1:
 
@@ -68,11 +128,15 @@ while True:
 
         atualizar_produtos(produtos, indice, nome, valor, quantidade, frete, margem, i1, i2, i3, vlrc, vlrv)
     elif opc == 4:
-        indice = int(input("Digite o valor do ID que deseja deletar:"))
+        indice = int(input("Digite o ID que deseja deletar:"))
         deletar_produto(produtos,indice)
     elif opc == 5:
-        atualizar_estoque(produtos, indice, valor, quantidade)
-        print("Estoque atualizado com sucesso!")  
+        print("Escolha uma opção:")
+        print("1 - Adicionar;")
+        print("2 - Remover;")
+        opc = int(input(""))
+        indice = int(input("Digite o ID do produto que deseja atualizar:"))
+        atualizar_estoque(produtos, indice)
     else:
 
         break
