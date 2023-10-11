@@ -70,4 +70,5 @@ while True:
         indice = int(input("Digite o ID do contato: "))-1
         deletar_contatos(contatos, indice)
     else:
+        print("Até logo caro amigo contato, estarei esperando ancioso pelo seu retorno! \n")
         break
